@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\TaskController;
 
+Route::get('/tasks', [TaskController::class, 'getTasks']);
 
-Route::get('/', function () {
-    return view('home');
-});
 Route::get('/login', function () {
     return view('login');
 });
