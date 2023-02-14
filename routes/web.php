@@ -16,22 +16,24 @@ use \App\Http\Controllers\UserController;
 
 use App\Http\Controllers\TaskController;
 
-Route::get('/tasks', [TaskController::class, 'getTasks']);
 
-Route::get('/login', function ()
-{
-    return view('login');
-});
 Route::get('/', function ()
 {
     return view('home');
 });
+Route::get('/tasks', [TaskController::class, 'getTasks']);
+
 Route::get('/register',function ()
 {
     return view('register');
 });
 Route::post('registerForm', [UserController::class, 'register']);
 
+Route::get('/login', function ()
+{
+    return view('login');
+});
+Route::post('loginForm', [UserController::class, 'login']);
 
 
 
