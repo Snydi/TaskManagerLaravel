@@ -1,27 +1,30 @@
 <x-layout>
-                                            <h1>Register</h1>
-    <h1>Password must have at least 8 characters, Uppercase letter and number</h1>
-<form action="{{url('registerForm')}}" method="POST">
-    @csrf
-<label class="">
-    <input class="" name="email" placeholder="Email:" type="text"
-           value="" >
-</label>
+                                    <x-slot:title>Register</x-slot:title>
 
-<label class="">
-    <input class="" name="password" placeholder="Password:" type="password"
-           value="" >
-</label>
+                                    <h1 class="centered__text">Register</h1>
 
-    <button type="submit" value= "submit" > Submit</button>
-</form>
+            <h4 class="centered__text">Password must have at least 8 characters, 1 uppercase letter and a number</h4>
+
+    <div class="form__wrapper">
+        <form action="{{url('registerForm')}}" method="POST">
+            @csrf
+            <label class="">
+                <input name="email" placeholder="Email:" type="text" value="" >
+            </label>
+
+            <label class="">
+                <input name="password" placeholder="Password:" type="password" value="" >
+            </label>
+
+            <button type="submit" value= "submit" > Submit</button>
+        </form>
+    </div>
+
     @if ($errors->any())
-        <div class="">
-            <ul>
+            <ul class = "error__list centered__text">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
     @endif
 </x-layout>
