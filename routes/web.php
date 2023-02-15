@@ -34,6 +34,7 @@ Route::get('/login', function ()
     return view('login');
 });
 Route::post('loginForm', [UserController::class, 'login']);
+Route::get('/logout', [UserController::class, 'logout']);
 
 
 

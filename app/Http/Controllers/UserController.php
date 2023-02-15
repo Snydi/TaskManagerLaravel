@@ -6,13 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function register(Request $request)
     {
         $user = new User();
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|unique:users|email',
             'password' =>  ['required', Password::min(8)->letters()->mixedCase()->numbers()],
         ]);
         $input = $request->all();
@@ -26,7 +27,28 @@ class UserController extends Controller
     public function login(Request $request)
     {
         //TODO complete the login method
-        $userData = User::where('email','=',  $request->input('email'))->get();
-        //return redirect('/');
+
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' =>  ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/');
+        }
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
