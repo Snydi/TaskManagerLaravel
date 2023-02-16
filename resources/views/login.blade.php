@@ -4,14 +4,12 @@
     <div class="form__wrapper">
         <form action="{{url('loginForm')}}" method="POST">
         @csrf
-            <label class="">
+            <div class="form__flex">
+
                 <input class="" name="email" placeholder="Email:" type="text" value="" >
-            </label>
 
-            <label class="">
                 <input class="" name="password" placeholder="Password:" type="password" value="" >
-            </label>
-
+            </div>
             <button class="button width100" type="submit" value= "submit" > Submit</button>
         </form>
     </div>

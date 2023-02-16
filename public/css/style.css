@@ -47,16 +47,19 @@ html
 .form__wrapper
 {
     margin: auto;
-    width: 30%;
+    width: 500px;
     border: 3px solid red;
     border-radius: 10px;
     padding: 10px;
 }
+.form__flex
+{
+    display:flex;
+    flex-direction: column;
+}
 input[type=text], input[type=password] {
-    width: 95%;
     padding: 12px;
     margin: 8px 0;
-    display: inline-block;
     border: 2px solid red;
     border-radius: 4px;
 }

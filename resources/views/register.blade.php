@@ -8,15 +8,14 @@
     <div class="form__wrapper">
         <form action="{{url('registerForm')}}" method="POST">
             @csrf
-            <label class="">
+            <div class="form__flex">
                 <input name="email" placeholder="Email:" type="text" value="" >
-            </label>
 
-            <label class="">
+
                 <input name="password" placeholder="Password:" type="password" value="" >
-            </label>
 
-            <button class="button width100" type="submit" value= "submit" > Submit</button>
+                <button class="button width100" type="submit" value= "submit" > Submit</button>
+            </div>
         </form>
     </div>
 

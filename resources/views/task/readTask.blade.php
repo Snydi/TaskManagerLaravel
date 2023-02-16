@@ -11,6 +11,9 @@
             <th>Task</th>
             <th>Status</th>
             <th>Deadline</th>
+            <th>Complete</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +22,7 @@
             <td class="centered__text">{{ $item->task }}</td>
             <td class="centered__text">{{ $item->status }}</td>
             <td class="centered__text">{{ $item->deadline }}</td>
+            <td> <a href="/updateTask"> <button class="button"> Update task</button></a> </td>
         </tr>
     @endforeach
         </tbody>

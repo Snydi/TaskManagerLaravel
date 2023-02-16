@@ -29,6 +29,18 @@ Route::get('/createTask',function ()
 });
 Route::post('/createTaskForm', [TaskController::class, 'createTask']);
 
+Route::get('/updateTask',function ()
+{
+    return view('task.updateTask');
+});
+Route::post('/updateTaskForm', [TaskController::class, 'updateTask']);
+
+
+
+
+
+
+
 Route::get('/register',function ()
 {
     return view('register');
