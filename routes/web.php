@@ -21,7 +21,13 @@ Route::get('/', function ()
 {
     return view('home');
 });
-Route::get('/tasks', [TaskController::class, 'getTasks']);
+Route::get('/tasks', [TaskController::class, 'readTask']);
+
+Route::get('/createTask',function ()
+{
+    return view('task.createTask');
+});
+Route::post('/createTaskForm', [TaskController::class, 'createTask']);
 
 Route::get('/register',function ()
 {

@@ -12,7 +12,7 @@
                 <input class="" name="password" placeholder="Password:" type="password" value="" >
             </label>
 
-            <button type="submit" value= "submit" > Submit</button>
+            <button class="button width100" type="submit" value= "submit" > Submit</button>
         </form>
     </div>
 
