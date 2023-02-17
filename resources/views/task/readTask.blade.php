@@ -17,11 +17,11 @@
         </tr>
         </thead>
         <tbody>
-    @foreach ($tasks as $item)
+    @foreach ($tasks as $task)
         <tr>
-            <td class="centered__text">{{ $item->task }}</td>
-            <td class="centered__text">{{ $item->status }}</td>
-            <td class="centered__text">{{ $item->deadline }}</td>
+            <td class="centered__text">{{ $task->task }}</td>
+            <td class="centered__text">{{ $task->status }}</td>
+            <td class="centered__text">{{ $task->deadline }}</td>
             <td> <a href="/updateTask"> <button class="button"> Update task</button></a> </td>
         </tr>
     @endforeach
