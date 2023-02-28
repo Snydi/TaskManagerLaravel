@@ -24,23 +24,23 @@ class TaskController extends Controller
         $task->task = $input['task'];
         $task->user_id = Auth::id();
         $task->status = 'In progress';
-        $task->deadline = '2002-08-28';
+        $task->deadline = $input['deadline'];
         $task->save();
         return redirect('/tasks');
     }
     public function updateTask(Request $request)
     {
-        //We use User id to get the Task id for find() method, because it searches only by primary key
-        $id = Task::where('user_id', Auth::id())->value('id'); //TODO 2 queries to db for 1 action good job
+        $id = Task::where('user_id', Auth::id())->value('id'); //TODO 2 queries to db for 1 action good job:)
         $task = Task::find($id);
 
         $request->validate([
             'task' => 'required',
         ]);
+
         $input = $request->all();
         $task->task = $input['task'];
         $task->status = 'In progress';
-        $task->deadline = '2002-08-28';
+        $task->deadline = $input['deadline'];
         $task->save();
         return redirect('/tasks');
     }

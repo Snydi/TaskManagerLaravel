@@ -9,10 +9,11 @@
         <form action="{{url('registerForm')}}" method="POST">
             @csrf
             <div class="form__flex">
-                <input name="email" placeholder="Email:" type="text" value="" >
+
+                <input class="form__input" name="email" placeholder="Email:" type="text" value="" >
 
 
-                <input name="password" placeholder="Password:" type="password" value="" >
+                <input class="form__input" name="password" placeholder="Password:" type="password" value="" >
 
                 <button class="button width100" type="submit" value= "submit" > Submit</button>
             </div>

@@ -57,11 +57,24 @@ html
     display:flex;
     flex-direction: column;
 }
-input[type=text], input[type=password] {
+.form__input {
     padding: 12px;
     margin: 8px 0;
     border: 2px solid red;
     border-radius: 4px;
+}
+.form__input:focus-visible {
+   outline: none;
+}
+.form__select
+{
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid red;
+    border-radius: 4px;
+}
+.form__select:focus-visible{
+    outline: none;
 }
 .button
 {
