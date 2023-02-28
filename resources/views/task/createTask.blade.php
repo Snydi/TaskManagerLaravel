@@ -5,11 +5,14 @@
     <div class="form__wrapper">
         <form action="{{url('createTaskForm')}}" method="POST">
             @csrf
-            <label class="">
-                <input name="task" placeholder="Task:" type="text" value="" >
-            </label>
+            <div class="form__flex">
 
-            <button type="submit" value= "submit" > Submit</button>
+                <input class="form__input" name="task" placeholder="Task:" type="text" value="" >
+
+                <input class="form__input" type="date" name="deadline" value="">
+
+                <button class="button width100" type="submit" value= "submit" > Submit</button>
+            </div>
         </form>
     </div>
 

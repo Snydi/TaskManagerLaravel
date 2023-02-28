@@ -6,7 +6,15 @@
         <form action="{{url('updateTaskForm')}}" method="POST">
             @csrf
             <div class="form__flex">
-                <input name="task" placeholder="Task:" type="text" value="" >
+
+                <input class="form__input" name="task" placeholder="Task:" type="text" value="" >
+                <input class="form__input" type="date" name="deadline" value="">
+
+                <select  class="form__select">
+                    <option value="In progress" class="form__option">In progress</option>
+                    <option value="Done" class="form__option">Done</option>
+                </select>
+
             <button class="button width100" type="submit" value= "submit" > Submit</button>
             </div>
         </form>
