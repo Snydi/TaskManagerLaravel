@@ -5,7 +5,7 @@
 
     <div class="content__wrapper">
         <a href="/createTask"> <button class="button">Create task</button></a>
-    <table class="table ">
+    <table class="table " >
         <thead>
         <tr>
             <th>Task</th>
@@ -22,7 +22,9 @@
             <td class="centered__text">{{ $task->task }}</td>
             <td class="centered__text">{{ $task->status }}</td>
             <td class="centered__text">{{ $task->deadline }}</td>
-            <td> <a href="/updateTask"> <button class="button"> Update task</button></a> </td>
+            <td> <a href="/completeTask"> <button class="button"> Complete task</button></a> </td>
+            <td> <a href="/updateTask/{{$task->id}}"> <button class="button"> Update task</button></a> </td>
+            <td> <a href="/deleteTask/{{$task->id}}"> <button class="button"> Delete task</button></a> </td>
         </tr>
     @endforeach
         </tbody>

@@ -7,20 +7,21 @@
             @csrf
             <div class="form__flex">
 
-                <input class="form__input" name="task" placeholder="Task:" type="text" value="" >
+                <label for="task">Task:</label>
+                <input class="form__input" name="task"  type="text" value="" >
 
-                <input class="form__input" type="date" name="deadline" value="">
+                <label for="deadline">Task must completed before:</label>
+                <input class="form__input" type="date" name="deadline" value="{{date('Y-m-d')}}">
 
                 <button class="button width100" type="submit" value= "submit" > Submit</button>
             </div>
         </form>
-    </div>
 
-    @if ($errors->any())
-        <ul class = "error__list centered__text">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+        @if ($errors->any())
+            <ul class = "error__list centered__text">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 </x-layout>

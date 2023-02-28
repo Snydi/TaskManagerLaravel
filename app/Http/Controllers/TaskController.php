@@ -28,6 +28,11 @@ class TaskController extends Controller
         $task->save();
         return redirect('/tasks');
     }
+    public function fillUpdateForm($id)
+    {
+        $task = Task::find($id);
+        return view('task.updateTask')->with('task', $task);
+    }
     public function updateTask(Request $request)
     {
         $id = Task::where('user_id', Auth::id())->value('id'); //TODO 2 queries to db for 1 action good job:)
@@ -39,9 +44,15 @@ class TaskController extends Controller
 
         $input = $request->all();
         $task->task = $input['task'];
-        $task->status = 'In progress';
+        $task->status = $input["status"];
         $task->deadline = $input['deadline'];
         $task->save();
+        return redirect('/tasks');
+    }
+    public function deleteTask($id)
+    {
+        $task = Task::find($id);
+        $task->delete();
         return redirect('/tasks');
     }
 }
