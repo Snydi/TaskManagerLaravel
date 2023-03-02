@@ -29,8 +29,9 @@ Route::get('/createTask',function ()
 });
 Route::post('/createTaskForm', [TaskController::class, 'createTask']);
 Route::get('/updateTask/{id}', [TaskController::class, 'fillUpdateForm']);
-Route::post('/updateTaskSubmit', [TaskController::class, 'updateTask']);
+Route::post('/updateTaskSubmit/{id}', [TaskController::class, 'updateTask']);
 Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+Route::get('/completeTask/{id}', [TaskController::class, 'completeTask']);
 
 
 

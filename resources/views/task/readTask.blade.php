@@ -20,12 +20,12 @@
     @foreach ($tasks as $task)
         <tr>
             <td class="centered__text">{{ $task->task }}</td>
-            <td class="centered__text">{{ $task->status }}</td>
+            <td class="centered__text {{$task->status==="In progress" ? "status__inProgress" : "status__complete"}}">{{ $task->status }}</td>
             <td class="centered__text">{{ $task->deadline }}</td>
             <td class="table__buttons">
-                <a href="/completeTask"> <button class="button button__table"> Complete</button></a>
-                <a href="/updateTask/{{$task->id}}"> <button class="button button__table"> Update</button></a>
-                <a href="/deleteTask/{{$task->id}}"> <button class="button button__table"> Delete</button></a>
+                <a href="/completeTask/{{$task->id}}"> <button class="button button__table button__green"> Complete</button></a>
+                <a href="/updateTask/{{$task->id}}"> <button class="button button__table button__blue "> Update</button></a>
+                <a href="/deleteTask/{{$task->id}}"> <button class="button button__table button__red"> Delete</button></a>
             </td>
         </tr>
     @endforeach

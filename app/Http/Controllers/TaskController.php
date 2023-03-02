@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     public function readTask()
     {
-        $tasks = Task::where('user_id',1)->get(); //need to change to a preferred ID
+        $tasks = Task::where('user_id',1)->get(); //TODO need to change to a preferred ID
         return view('task.readTask',['tasks'=>$tasks]);
     }
     public function createTask(Request $request)
@@ -33,11 +32,9 @@ class TaskController extends Controller
         $task = Task::find($id);
         return view('task.updateTask')->with('task', $task);
     }
-    public function updateTask(Request $request)
+    public function updateTask(Request $request, $id)
     {
-        $id = Task::where('user_id', Auth::id())->value('id'); //TODO 2 queries to db for 1 action good job:)
         $task = Task::find($id);
-
         $request->validate([
             'task' => 'required',
         ]);
@@ -55,4 +52,13 @@ class TaskController extends Controller
         $task->delete();
         return redirect('/tasks');
     }
+    public function completeTask($id)
+    {
+        $task = Task::find($id);
+        $task->status = "Complete";
+        $task->save();
+        return redirect('/tasks');
+    }
+
+    //TODO make a completeTask button, recolor buttons, add a <hr> to create button, optimize queries, fix a shitton of errors
 }
