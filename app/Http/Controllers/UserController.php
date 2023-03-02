@@ -17,7 +17,6 @@ class UserController extends Controller
             'password' =>  ['required', Password::min(8)->letters()->mixedCase()->numbers()],
         ]);
         $input = $request->all();
-
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
         $user->save();
@@ -42,11 +41,8 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }

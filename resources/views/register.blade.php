@@ -10,12 +10,14 @@
             @csrf
             <div class="form__flex">
 
-                <input class="form__input" name="email" placeholder="Email:" type="text" value="" >
+                <label for="email">Email:</label>
+                    <input class="form__input" name="email" type="text" value="" >
 
-
-                <input class="form__input" name="password" placeholder="Password:" type="password" value="" >
+                <label for="password">Password:</label>
+                    <input class="form__input" name="password" placeholder="Password:" type="password" value="" >
 
                 <button class="button width100" type="submit" value= "submit" > Submit</button>
+
             </div>
         </form>
     </div>

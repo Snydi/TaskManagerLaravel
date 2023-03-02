@@ -23,12 +23,12 @@ Route::get('/', function ()
 });
 Route::get('/tasks', [TaskController::class, 'readTask']);
 
-Route::get('/createTask',function ()
+Route::get('/create-task',function ()
 {
     return view('task.createTask');
 });
 Route::post('/createTaskForm', [TaskController::class, 'createTask']);
-Route::get('/updateTask/{id}', [TaskController::class, 'fillUpdateForm']);
+Route::get('/update-task/{id}', [TaskController::class, 'fillUpdateForm']);
 Route::post('/updateTaskSubmit/{id}', [TaskController::class, 'updateTask']);
 Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
 Route::get('/completeTask/{id}', [TaskController::class, 'completeTask']);

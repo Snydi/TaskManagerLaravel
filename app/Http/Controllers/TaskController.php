@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     public function readTask()
     {
-        $tasks = Task::where('user_id',1)->get(); //TODO need to change to a preferred ID
+        $tasks = Task::where('user_id',Auth::id())->get();
         return view('task.readTask',['tasks'=>$tasks]);
     }
     public function createTask(Request $request)
@@ -19,12 +19,14 @@ class TaskController extends Controller
         $request->validate([
             'task' => 'required',
             ]);
+
         $input = $request->all();
         $task->task = $input['task'];
         $task->user_id = Auth::id();
         $task->status = 'In progress';
         $task->deadline = $input['deadline'];
         $task->save();
+
         return redirect('/tasks');
     }
     public function fillUpdateForm($id)
@@ -44,6 +46,7 @@ class TaskController extends Controller
         $task->status = $input["status"];
         $task->deadline = $input['deadline'];
         $task->save();
+
         return redirect('/tasks');
     }
     public function deleteTask($id)
@@ -59,6 +62,4 @@ class TaskController extends Controller
         $task->save();
         return redirect('/tasks');
     }
-
-    //TODO make a completeTask button, recolor buttons, add a <hr> to create button, optimize queries, fix a shitton of errors
 }
