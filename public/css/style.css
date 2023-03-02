@@ -52,6 +52,13 @@ html
     border-radius: 10px;
     padding: 10px;
 }
+table{
+
+}
+td,th{
+    border:1px solid black;
+}
+
 .form__flex
 {
     display:flex;
@@ -89,10 +96,30 @@ html
     border-radius: 4px;
 
 }
+.button__create{
+
+}
 .table
 {
     margin-top: 30px;
     width: 100%;
+
+}
+.main__table{
+    width:30%;
+}
+.button__table{
+
+    padding: 4px 10px;
+    width:80px;
+    height:35px;
+}
+.table__buttons{
+    display:flex;
+    justify-content: center;
+    gap:10px;
+    padding: 5px 10px;
+
 }
 .width100
 {
