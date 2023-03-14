@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id()->unique();
+            $table->id();
             $table->text('task');
-            $table->foreignId('user_id');
+            $table->foreignId('group_id');
             $table->string('status');
             $table->date('deadline');
         });

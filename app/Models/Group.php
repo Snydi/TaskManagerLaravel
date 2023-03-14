@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Group extends Model
 {
     use HasFactory;
-
-    public function task()
+    public function group()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(User::class);
+    }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
     public $timestamps = false; //disabling Laravel timestamp requirement
 }

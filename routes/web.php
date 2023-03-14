@@ -15,6 +15,7 @@ use \App\Http\Controllers\UserController;
 */
 
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\GroupController;
 
 
 Route::get('/', function ()
@@ -23,11 +24,17 @@ Route::get('/', function ()
 });
 Route::get('/tasks', [TaskController::class, 'readTask']);
 
-Route::get('/create-task',function ()
-{
-    return view('task.createTask');
-});
+Route::get('/create-task', [TaskController::class, 'FillGroupSelect']);
+
 Route::post('/create-task-submit', [TaskController::class, 'createTask']);
+
+Route::get('/create-group',function ()
+{
+    return view('task.createGroup');
+});
+Route::post('/create-group-submit', [GroupController::class, 'createGroup']);
+
+
 
 
 Route::get('/update-task/{id}', [TaskController::class, 'fillUpdateForm']);

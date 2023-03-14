@@ -41,8 +41,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public $timestamps = false; //disabling Laravel timestamp requirement
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasManyThrough(Task::class, Group::class);
     }
+
 }

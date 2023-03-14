@@ -13,6 +13,16 @@
                 <label for="deadline">Task must completed before:</label>
                 <input class="form__input" type="date" name="deadline" value="{{date('Y-m-d')}}">
 
+                <select name="group" class="form__select" >
+                    @foreach($groups as $group)
+                        <option value="{{$group->id}}">
+                            {{$group->group}}
+                        </option>
+                    @endforeach
+                </select>
+
+
+
                 <button class="button width100" type="submit" value= "submit" > Submit</button>
             </div>
         </form>

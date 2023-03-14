@@ -5,6 +5,7 @@
 
     <div class="content__wrapper">
         <a href="/create-task"> <button class="button button__create">Create task</button></a>
+        <a href="/create-group"> <button class="button">Create group</button></a>
 
     <table class="table " >
         <thead>

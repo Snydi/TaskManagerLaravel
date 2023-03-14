@@ -20,8 +20,11 @@ class UserController extends Controller
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
         $user->save();
-
-        return redirect('/'); //Need to add success message
+        $user->groups()->insert([ //We create a default group attached to a user
+            'group' => 'No group',
+            'user_id'=> $user->id
+        ]);
+        return redirect('/'); //TODO  add success message
     }
     public function login(Request $request)
     {
