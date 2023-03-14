@@ -19,7 +19,7 @@
 
     @foreach ($tasks as $task)
         <tr>
-            <td class="centered__text">{{ $task->task }}</td>
+            <td class="centered__text td__task">{{ $task->task }}</td>
             <td class="centered__text">{{ $task->deadline }}</td>
             <td class="centered__text {{$task->status==="In progress" ? "status__inProgress" : "status__complete"}}">{{ $task->status }}</td>
             <td class="table__buttons">

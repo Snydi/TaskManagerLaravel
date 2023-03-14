@@ -91,6 +91,11 @@ html {
 td,th{
     border:1px solid black;
     text-align: center;
+
+}
+.td__task{
+    max-width: 500px;
+    word-wrap: break-word;
 }
 .main__table{
     width:30%;

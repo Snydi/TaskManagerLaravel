@@ -3,7 +3,7 @@
 
                                 <h1 class="centered__text">Update task</h1>
     <div class="form__wrapper">
-        <form action="{{url('updateTaskSubmit', ['id' => $task->id])}}" method="POST">
+        <form action="{{url('update-task-submit', ['id' => $task->id])}}" method="POST">
             @csrf
             <div class="form__flex">
                 <label for="task">Task:</label>

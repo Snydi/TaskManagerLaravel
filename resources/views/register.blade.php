@@ -6,7 +6,7 @@
             <h4 class="centered__text">Password must have at least 8 characters, 1 uppercase letter and a number</h4>
 
     <div class="form__wrapper">
-        <form action="{{url('registerForm')}}" method="POST">
+        <form action="/register-form" method="POST">
             @csrf
             <div class="form__flex">
 

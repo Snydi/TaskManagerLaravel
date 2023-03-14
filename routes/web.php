@@ -27,11 +27,17 @@ Route::get('/create-task',function ()
 {
     return view('task.createTask');
 });
-Route::post('/createTaskForm', [TaskController::class, 'createTask']);
+Route::post('/create-task-submit', [TaskController::class, 'createTask']);
+
+
 Route::get('/update-task/{id}', [TaskController::class, 'fillUpdateForm']);
-Route::post('/updateTaskSubmit/{id}', [TaskController::class, 'updateTask']);
-Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+Route::post('/update-task-submit/{id}', [TaskController::class, 'updateTask']);
+
+
+
 Route::get('/completeTask/{id}', [TaskController::class, 'completeTask']);
+Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+
 
 
 
@@ -40,13 +46,13 @@ Route::get('/register',function ()
 {
     return view('register');
 });
-Route::post('registerForm', [UserController::class, 'register']);
+Route::post('register-form', [UserController::class, 'register']);
 
 Route::get('/login', function ()
 {
     return view('login');
 });
-Route::post('loginForm', [UserController::class, 'login']);
+Route::post('login-form', [UserController::class, 'login']);
 Route::get('/logout', [UserController::class, 'logout']);
 
 

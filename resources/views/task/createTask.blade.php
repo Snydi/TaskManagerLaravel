@@ -3,7 +3,7 @@
 
                             <h1 class="centered__text">Create task</h1>
     <div class="form__wrapper">
-        <form action="{{url('createTaskForm')}}" method="POST">
+        <form action="/create-task-submit" method="POST">
             @csrf
             <div class="form__flex">
 
