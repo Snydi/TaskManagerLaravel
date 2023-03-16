@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaskResource;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Models\Task;
@@ -10,10 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    public function index()
+    {
+        $tasks = Task::all();
+        return TaskResource::collection($tasks);
+    }
     public function readTask()
     {
         $user = User::find(Auth::id());
-
         return view('task.readTask',['tasks'=>$user->tasks]);
     }
     public function createTask(Request $request)
