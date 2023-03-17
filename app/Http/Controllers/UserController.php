@@ -12,6 +12,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $user = new User();
+
         $request->validate([
             'email' => 'required|unique:users|email',
             'password' =>  ['required', Password::min(8)->letters()->mixedCase()->numbers()],
@@ -33,13 +34,17 @@ class UserController extends Controller
             'password' =>  ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials))
+        {
             $request->session()->regenerate();
             return redirect('/');
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        else
+        {
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
+        }
     }
     public function logout(Request $request)
     {

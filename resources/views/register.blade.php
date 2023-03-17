@@ -11,7 +11,7 @@
             <div class="form__flex">
 
                 <label for="email">Email:</label>
-                    <input class="form__input" name="email" type="text" value="" >
+                    <input class="form__input" name="email" type="text" value="{{old('email')}}" >
 
                 <label for="password">Password:</label>
                     <input class="form__input" name="password" placeholder="Password:" type="password" value="" >

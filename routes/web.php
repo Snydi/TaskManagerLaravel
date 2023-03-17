@@ -63,5 +63,5 @@ Route::post('login-form', [UserController::class, 'login']);
 Route::get('/logout', [UserController::class, 'logout']);
 
 
-Route::get('/api/tasks', [\App\Http\Controllers\TaskController::class, 'index']);
+
 

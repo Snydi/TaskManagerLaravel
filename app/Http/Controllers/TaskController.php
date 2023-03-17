@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function index()
-    {
-        $tasks = Task::all();
-        return TaskResource::collection($tasks);
-    }
+
     public function readTask()
     {
         $user = User::find(Auth::id());
