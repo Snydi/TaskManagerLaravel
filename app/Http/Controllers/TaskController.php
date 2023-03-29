@@ -45,7 +45,11 @@ class TaskController extends Controller
     }
     public function updateTask(Request $request, $id)
     {
+
         $task = Task::find($id);
+        if ($request->user()->cannot('update', $task)) {
+            abort(403);
+        }
         $request->validate([
             'task' => 'required',
         ]);

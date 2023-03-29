@@ -13,5 +13,6 @@ class Task extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
     public $timestamps = false; //disabling Laravel timestamp requirement
 }
