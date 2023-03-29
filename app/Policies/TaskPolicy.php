@@ -30,7 +30,9 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        //
+        return $user->id == $task->group_id
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
@@ -67,7 +69,9 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        //
+        return $user->id == $task->group_id
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
@@ -91,6 +95,8 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task)
     {
-        //
+        return $user->id == $task->group_id
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 }

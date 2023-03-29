@@ -4,8 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-
+use App\Http\Resources\TaskResource;
 class TaskController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +37,8 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = Task::create($request->all());
+        return response()->json($book, 201);
     }
 
     /**
@@ -45,9 +47,13 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
-        return Task::find($id);
+        $task = Task::find($id);
+        if ($request->user()->cannot('view', $task)) {
+            abort(403);
+        }
+        return $task;
     }
 
     /**

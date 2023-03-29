@@ -51,7 +51,7 @@ class UserController extends Controller
             if(!Auth::attempt($credentials)){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'Wrong email or password',
                 ], 401);
             }
 

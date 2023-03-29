@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\TaskController;
 use \App\Http\Controllers\API\UserController;
+use \App\Models\Task;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,14 +19,11 @@ use \App\Http\Controllers\API\UserController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-//Route::get('/users', [UserController::class, 'getUsers']);
-//Route::post('/register', [UserController::class, 'register']);
-//Route::get('/login', [UserController::class, 'login']);
-
 Route::post('/auth/register', [UserController::class, 'register']);
 Route::post('/auth/login', [UserController::class, 'login']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::resource('tasks', TaskController::class);
-
+   // Route::resource('tasks', TaskController::class);
+    Route::post('/tasks/store', [TaskController::class, 'store']);
 });
+
