@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,18 +12,17 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            //Validated
             $request->validate([
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8',
             ]);
-
             $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' =>bcrypt($request->password),
             ]);
             $user->save();
+
             $user->groups()->insert([ //We create a default group attached to a user
                 'group' => 'No group',
                 'user_id'=> $user->id
@@ -62,7 +60,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken //TODO remove the token_id fron response
+                'token' => substr($user->createToken("API TOKEN")->plainTextToken,2) //removing the token_id from response
             ], 200);
 
         } catch (\Throwable $th) {
