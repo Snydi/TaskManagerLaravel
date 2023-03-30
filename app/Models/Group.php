@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
+    protected $fillable =
+    [
+        'group',
+        'user_id'
+    ];
     public function group()
     {
         return $this->belongsTo(User::class);

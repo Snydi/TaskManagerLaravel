@@ -16,6 +16,7 @@ class Task extends Model
             'status',
             'deadline'
         ];
+
     public function task()
     {
         return $this->belongsTo(Group::class);
