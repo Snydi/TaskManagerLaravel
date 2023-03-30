@@ -22,14 +22,16 @@ class UserController extends Controller
             $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt($request->password),
+                'password' =>bcrypt($request->password),
             ]);
             $user->save();
-
+            $user->groups()->insert([ //We create a default group attached to a user
+                'group' => 'No group',
+                'user_id'=> $user->id
+            ]);
             return response()->json([
                 'status' => true,
-                'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'message' => 'User Created Successfully'
             ], 200);
 
         } catch (\Throwable $th) {
@@ -56,7 +58,7 @@ class UserController extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
-           // $user = $request->user(); //TODO figure out what it is
+
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',

@@ -41,9 +41,11 @@ class TaskPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Task $task) //User can onlu create tasks for himself
     {
-        //
+        return $user->id == $task->group_id
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
