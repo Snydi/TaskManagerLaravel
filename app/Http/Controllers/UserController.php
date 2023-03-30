@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     public function register(Request $request)
@@ -17,10 +18,12 @@ class UserController extends Controller
             'email' => 'required|unique:users|email',
             'password' =>  ['required', Password::min(8)->letters()->mixedCase()->numbers()],
         ]);
+
         $input = $request->all();
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
         $user->save();
+
         $user->groups()->insert([ //We create a default group attached to a user
             'group' => 'No group',
             'user_id'=> $user->id

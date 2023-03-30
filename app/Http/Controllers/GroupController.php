@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
-    public function createGroup(Request $request)
+    //TODO add more methods here
+    public function create(Request $request)
     {
         $group = new Group();
         $request->validate([

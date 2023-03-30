@@ -31,9 +31,7 @@ class GroupPolicy
      */
     public function view(User $user, Group $group)
     {
-        return $user->id == $group->user_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $group->user_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -44,9 +42,7 @@ class GroupPolicy
      */
     public function create(User $user, Group $group)
     {
-        return $user->id == $group->user_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $group->user_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -58,9 +54,7 @@ class GroupPolicy
      */
     public function update(User $user, Group $group)
     {
-        return $user->id == $group->user_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $group->user_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -72,9 +66,7 @@ class GroupPolicy
      */
     public function delete(User $user, Group $group)
     {
-        return $user->id == $group->user_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $group->user_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**

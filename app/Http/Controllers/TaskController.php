@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
 
-    public function readTask()
+    public function index() //this function deviates from standard due to the fact that user may only see their tasks
     {
         $user = User::find(Auth::id());
-        return view('task.readTask',['tasks'=>$user->tasks]);
+        return view('task.index',['tasks'=>$user->tasks]);
     }
-    public function createTask(Request $request)
+    public function store(Request $request)
     {
         $task = new Task();
         $request->validate([
@@ -33,19 +33,18 @@ class TaskController extends Controller
 
         return redirect('/tasks');
     }
-    public function fillUpdateForm($id)
+    public function edit($id)
     {
         $task = Task::find($id);
-        return view('task.updateTask')->with('task', $task);
+        return view('task.edit')->with('task', $task);
     }
-    public function fillGroupSelect()
+    public function create()
     {
         $user = User::find(Auth::id());
-        return view('task.createTask')->with('groups',  $user->groups);
+        return view('task.create')->with('groups',  $user->groups);
     }
-    public function updateTask(Request $request, $id)
+    public function update(Request $request, $id)
     {
-
         $task = Task::find($id);
         if ($request->user()->cannot('update', $task)) {
             abort(403);

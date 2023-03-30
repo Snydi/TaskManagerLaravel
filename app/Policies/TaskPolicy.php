@@ -6,6 +6,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+
 class TaskPolicy
 {
     use HandlesAuthorization;
@@ -30,9 +31,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        return $user->id == $task->group_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -43,9 +42,7 @@ class TaskPolicy
      */
     public function create(User $user, Task $task) //User can onlu create tasks for himself
     {
-        return $user->id == $task->group_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -57,9 +54,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        return $user->id == $task->group_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -71,9 +66,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return $user->id == $task->group_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -97,8 +90,6 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task)
     {
-        return $user->id == $task->group_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        //
     }
 }
