@@ -16,12 +16,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->text('group');
-            $table->foreignId('user_id');
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

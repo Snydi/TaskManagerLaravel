@@ -26,7 +26,7 @@
             <td class="table__buttons">
                 <a href="/completeTask/{{$task->id}}"> <button class="button button__table button__green"> Complete</button></a>
                 <a href="/update-task/{{$task->id}}"> <button class="button button__table button__blue "> Update</button></a>
-                <a href="/deleteTask/{{$task->id}}"> <button class="button button__table button__red"> Delete</button></a>
+                <a href="/delete/{{$task->id}}"> <button class="button button__table button__red"> Delete</button></a>
             </td>
         </tr>
     @endforeach

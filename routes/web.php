@@ -30,7 +30,7 @@ Route::get('/update-task/{id}', [TaskController::class, 'edit']);
 Route::post('/update-task-submit/{id}', [TaskController::class, 'update']);
 
 Route::get('/completeTask/{id}', [TaskController::class, 'completeTask']);
-Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+Route::get('/delete/{id}', [TaskController::class, 'delete']);
 
 
 Route::post('/create-group-submit', [GroupController::class, 'create']);
