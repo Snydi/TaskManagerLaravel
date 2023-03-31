@@ -1,6 +1,7 @@
 <x-layout>
                                         <x-slot:title>Login</x-slot:title>
                                         <h1 class="centered__text">Login</h1>
+
     <div class="form__wrapper">
         <form action="/login-form" method="POST">
         @csrf

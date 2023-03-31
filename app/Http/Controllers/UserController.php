@@ -28,7 +28,7 @@ class UserController extends Controller
             'group' => 'No group',
             'user_id'=> $user->id
         ]);
-        return redirect('/'); //TODO  add success message
+        return redirect('/login');
     }
     public function login(Request $request)
     {

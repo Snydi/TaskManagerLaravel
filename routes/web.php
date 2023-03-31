@@ -16,7 +16,7 @@ use \App\Http\Controllers\UserController;
 
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\GroupController;
-//TODO refacttor all of these routes so they are in check with convention and also proper methods
+//TODO start using proper methods for update and delete
 
 Route::get('/', function ()
 {
@@ -30,7 +30,7 @@ Route::get('/update-task/{id}', [TaskController::class, 'edit']);
 Route::post('/update-task-submit/{id}', [TaskController::class, 'update']);
 
 Route::get('/completeTask/{id}', [TaskController::class, 'completeTask']);
-Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+Route::get('/delete/{id}', [TaskController::class, 'delete']);
 
 
 Route::post('/create-group-submit', [GroupController::class, 'create']);
