@@ -19,6 +19,11 @@ return new class extends Migration
             $table->foreignId('group_id');
             $table->string('status');
             $table->date('deadline');
+
+            $table->foreign('group_id')
+                ->references('id')
+                ->on('groups')
+                ->onDelete('cascade');
         });
     }
 

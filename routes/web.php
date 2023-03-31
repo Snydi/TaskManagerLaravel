@@ -16,7 +16,7 @@ use \App\Http\Controllers\UserController;
 
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\GroupController;
-//TODO refacttor all of these routes so they are in check with convention and also proper methods
+//TODO start using proper methods for update and delete
 
 Route::get('/', function ()
 {
