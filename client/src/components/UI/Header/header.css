@@ -1,0 +1,24 @@
+ul, li {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+header{
+    background:rgba(255, 0, 0, 0.699);
+    
+}
+.header__wrapper{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.header__content{
+    padding:20px 0px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header__auth{
+    display:flex;
+    flex-direction: row;
+    gap:30px;
+}
