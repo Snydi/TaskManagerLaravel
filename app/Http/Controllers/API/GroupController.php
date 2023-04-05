@@ -45,7 +45,7 @@ class GroupController extends Controller
             $group->delete(); // TODO maybe optimize it later so there won't be as many queries
             abort(403);
         }
-        return response()->json(['message' => 'Group added successfully'], 201);
+        return response()->json($group, 201);
     }
 
     /**
