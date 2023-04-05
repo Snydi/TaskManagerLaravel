@@ -42,6 +42,7 @@ class GroupController extends Controller
         $group = Group::create($request->json()->all());
         if ($request->user()->cannot('create', $group))
         {
+            $group->delete(); // TODO maybe optimize it later so there won't be as many queries
             abort(403);
         }
         return response()->json($group, 201);
@@ -84,13 +85,14 @@ class GroupController extends Controller
     public function update(Request $request, $id)
     {
         $group = Group::find($id);
+
+        $input = $request->json()->all();
+        $group->group = $input['group'];
+        $group->user_id = $input['user_id'];
         if ($request->user()->cannot('update', $group))
         {
             abort(403);
         }
-        $input = $request->json()->all();
-        $group->group = $input['group'];
-        $group->user_id = $input['user_id']; //TODO need to restrict this field so user can't change user_id in a way that unbinds it from him
         $group->save();
         return response()->json(['message' => 'Group updated successfully']);
     }

@@ -29,6 +29,10 @@ class TaskController extends Controller
         $task->group_id = $input['group'];
         $task->status = 'In progress';
         $task->deadline = $input['deadline'];
+        if ($request->user()->cannot('create', $task))
+        {
+            abort(403);
+        }
         $task->save();
 
         return redirect('/tasks');
@@ -46,9 +50,6 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $task = Task::find($id);
-        if ($request->user()->cannot('update', $task)) {
-            abort(403);
-        }
         $request->validate([
             'task' => 'required',
         ]);
@@ -57,6 +58,9 @@ class TaskController extends Controller
         $task->task = $input['task'];
         $task->status = $input["status"];
         $task->deadline = $input['deadline'];
+        if ($request->user()->cannot('update', $task)) {
+            abort(403);
+        }
         $task->save();
 
         return redirect('/tasks');

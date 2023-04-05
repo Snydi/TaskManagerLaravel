@@ -38,10 +38,11 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $task = Task::create($request->json()->all());
-      //  if ($request->user()->cannot('create', $task))
-      //  {
-      //      abort(403);
-      //  }
+        if ($request->user()->cannot('create', $task))
+        {
+            $task->delete(); // TODO maybe optimize it later so there won't be as many queries
+            abort(403);
+        }
         return response()->json($task, 201);
     }
 
@@ -54,10 +55,10 @@ class TaskController extends Controller
     public function show($id,Request $request)
     {
         $task = Task::find($id);
-    //    if ($request->user()->cannot('view', $task))
-    //    {
-    //        abort(403);
-    //    }
+        if ($request->user()->cannot('view', $task))
+        {
+            abort(403);
+        }
         return $task;
     }
 
@@ -80,14 +81,14 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $task = Task::find($id);
-      //  if ($request->user()->cannot('update', $task)) {
-      //      abort(403);
-      //  }
         $input = $request->json()->all();
         $task->task = $input['task'];
         $task->status = $input["status"];
         $task->deadline = $input['deadline'];
-        $task->group_id = $input['group_id']; //TODO need to restrict this field so user can't change group_id in a way that unbinds it from him
+        $task->group_id = $input['group_id'];
+        if ($request->user()->cannot('update', $task)) {
+            abort(403);
+        }
         $task->save();
 
         return response()->json(['message' => 'Task updated successfully']);
