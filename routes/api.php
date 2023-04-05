@@ -37,4 +37,3 @@ Route::middleware(['auth:sanctum'])->group(function ()
     Route::put('/groups/{id}', [GroupController::class, 'update']);
     Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
 });
-

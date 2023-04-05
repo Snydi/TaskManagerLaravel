@@ -38,11 +38,11 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $task = Task::create($request->json()->all());
-        if ($request->user()->cannot('create', $task))
-        {
-            abort(403);
-        }
-        return response()->json(['message' => 'Task added successfully'], 201);
+      //  if ($request->user()->cannot('create', $task))
+      //  {
+      //      abort(403);
+      //  }
+        return response()->json($task, 201);
     }
 
     /**
@@ -54,10 +54,10 @@ class TaskController extends Controller
     public function show($id,Request $request)
     {
         $task = Task::find($id);
-        if ($request->user()->cannot('view', $task))
-        {
-            abort(403);
-        }
+    //    if ($request->user()->cannot('view', $task))
+    //    {
+    //        abort(403);
+    //    }
         return $task;
     }
 
@@ -80,9 +80,9 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $task = Task::find($id);
-        if ($request->user()->cannot('update', $task)) {
-            abort(403);
-        }
+      //  if ($request->user()->cannot('update', $task)) {
+      //      abort(403);
+      //  }
         $input = $request->json()->all();
         $task->task = $input['task'];
         $task->status = $input["status"];
@@ -102,10 +102,10 @@ class TaskController extends Controller
     public function destroy($id,Request $request)
     {
         $task = Task::find($id);
-        if ($request->user()->cannot('delete', $task))
-        {
-            abort(403);
-        }
+       // if ($request->user()->cannot('delete', $task))
+       // {
+       //     abort(403);
+       // }
         $task->delete();
         return response()->json(['message' => 'Task deleted successfully']);
     }

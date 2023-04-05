@@ -44,7 +44,7 @@ class GroupController extends Controller
         {
             abort(403);
         }
-        return response()->json(['message' => 'Group added successfully'], 201);
+        return response()->json($group, 201);
     }
 
     /**
