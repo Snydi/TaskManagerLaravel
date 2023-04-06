@@ -31,7 +31,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
+        return  $user->groups->contains('id', $task->group_id) ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -42,7 +42,7 @@ class TaskPolicy
      */
     public function create(User $user, Task $task)
     {
-        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
+        return  $user->groups->contains('id', $task->group_id) ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -54,7 +54,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
+        return  $user->groups->contains('id', $task->group_id) ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**
@@ -66,7 +66,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return $user->id == $task->group_id ? Response::allow() : Response::denyAsNotFound();
+        return  $user->groups->contains('id', $task->group_id) ? Response::allow() : Response::denyAsNotFound();
     }
 
     /**

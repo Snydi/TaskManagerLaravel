@@ -86,11 +86,11 @@ class TaskController extends Controller
         $task->status = $input["status"];
         $task->deadline = $input['deadline'];
         $task->group_id = $input['group_id'];
+
         if ($request->user()->cannot('update', $task)) {
             abort(403);
         }
         $task->save();
-
         return response()->json(['message' => 'Task updated successfully']);
     }
 
