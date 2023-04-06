@@ -31,7 +31,7 @@ const Home = () => {
             console.log(error);
             setIsLoading(false);
           });
-      }, 800);
+      }, 500);
     useEffect(() => {
         setIsLoading(true)
         const token = JSON.parse(localStorage.getItem('token'));
