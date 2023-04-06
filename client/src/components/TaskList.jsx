@@ -2,6 +2,7 @@ import React from "react";
 import TaskItem from "./TaskItem";
 
 const TaskList = ({ tasks, remove, edit, groups }) => {
+
   return (
     <div className="tasks">
       {tasks.map((task, index) => (

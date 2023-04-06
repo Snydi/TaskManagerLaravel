@@ -19,7 +19,7 @@ const Auth = ({ isRegistering }) => {
         if (!isRegistering) {
             const response = axios.post("/api/auth/login", formData)
                 .then(response => {
-                    localStorage.setItem('token', JSON.stringify(response.data.token.substring(1)))
+                    localStorage.setItem('token', JSON.stringify(response.data.token))
                     setIsLoggedIn(prev => !prev)
                     localStorage.setItem('isLoggedIn', true);
                     navigate('/')
