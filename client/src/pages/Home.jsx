@@ -4,6 +4,8 @@ import axios from 'axios';
 import TaskList from '../components/TaskList';
 import MyLoader from '../components/UI/Loader/myLoader';
 import useDebounce from '../hooks/useDebounce';
+import MyModal from '../components/UI/Modal/myModal';
+import GroupList from '../components/GroupList';
 const Home = () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
     const [tasks, setTasks] = useState([])
@@ -20,6 +22,7 @@ const Home = () => {
         group: "",
         user_id: null
     })
+    const [modal, setModal] = useState(false);
     const debouncedUpdateTask = useDebounce((taskId, updatedTask) => {
         setIsLoading(true);
         axios
@@ -104,7 +107,11 @@ const Home = () => {
 
     return (
         <div className='homepage'>
+            <MyModal visible={modal} setVisible={setModal}>
+                <GroupList groups={groups}/>
+            </MyModal>
             <div className='wrapper'>
+            <button onClick={() => setModal(true)}>Edit groups</button>
             <form>
                 <input placeholder='Task name' value={newTask.task} onChange={e => setNewTask({ ...newTask, task: e.target.value })} />
                 <select value={selectGroup} onChange={e => setSelectGroup(e.target.value)}>
