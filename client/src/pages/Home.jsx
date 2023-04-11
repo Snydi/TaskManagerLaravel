@@ -23,18 +23,6 @@ const Home = () => {
         user_id: null
     })
     const [modal, setModal] = useState(false);
-    const debouncedUpdateTask = useDebounce((taskId, updatedTask) => {
-        setIsLoading(true);
-        axios
-          .put(`/api/tasks/${taskId}`, updatedTask)
-          .then(() => {
-            setIsLoading(false);
-          })
-          .catch(error => {
-            console.log(error);
-            setIsLoading(false);
-          });
-      }, 500);
     useEffect(() => {
         setIsLoading(true)
         const token = JSON.parse(localStorage.getItem('token'));
@@ -49,7 +37,42 @@ const Home = () => {
             setIsLoading(false)
         })
     }, []);
-
+    //const debouncedUpdateTask = useDebounce((taskId, updatedTask) => {
+    //    setIsLoading(true);
+    //    axios
+    //      .put(`/api/tasks/${taskId}`, updatedTask)
+    //      .then(() => {
+    //        setIsLoading(false);
+    //      })
+    //      .catch(error => {
+    //        console.log(error);
+    //        setIsLoading(false);
+    //      });
+    //  }, 350);
+    //  const debouncedUpdateGroup = useDebounce((groupId, updatedGroup) => {
+    //    setIsLoading(true)
+    //    axios
+    //    .put(`/api/groups/${groupId}`, updatedGroup)
+    //    .then(() => {
+    //        setIsLoading(false)
+    //    })
+    //    .catch(error => {
+    //        console.log(error)
+    //        setIsLoading(false)
+    //    })
+    //  }, 350)
+      const debouncedEdit = useDebounce((id, updated, obj) => {
+        setIsLoading(true)
+        axios
+        .put(`/api/${obj}/${id}`,updated)
+        .then(() => {
+            setIsLoading(false)
+        })
+        .catch(error => {
+            console.log(error)
+            setIsLoading(false)
+        })
+      },350)
     function addTask(e) {
         e.preventDefault()
         setIsLoading(true)
@@ -70,14 +93,43 @@ const Home = () => {
         });
     }
 
-    function editTask(task, value, index, key) {
-        const updatedTasks = [...tasks];
-        updatedTasks[index] = {
-            ...updatedTasks[index],
+   // function editTask(task, value, index, key) {
+   //     const updatedTasks = [...tasks];
+   //     updatedTasks[index] = {
+   //         ...updatedTasks[index],
+   //         [key]: value
+   //     };
+   //     setTasks(updatedTasks);
+   //     debouncedUpdateTask(task.id, updatedTasks[index])
+   // }
+   // function editGroup(group, value, index, key) {
+   //     const updatedGroups = [...groups]
+   //     updatedGroups[index] = {
+   //         ...updatedGroups[index],
+   //         [key]: value
+   //     }
+   //     setGroups(updatedGroups)
+   //     debouncedUpdateGroup(group.id, updatedGroups[index])
+   // }
+    function edit(arr,value,index,key,obj){
+        let updated = []
+        if(obj === "groups"){
+            updated = [...groups]
+        }
+        else{
+            updated = [...tasks]
+        }
+        updated[index] = {
+            ...updated[index],
             [key]: value
-        };
-        setTasks(updatedTasks);
-        debouncedUpdateTask(task.id, updatedTasks[index])
+        }
+        if(obj === "groups"){
+            setGroups(updated)
+        }
+        else{
+            setTasks(updated)
+        }
+        debouncedEdit(arr.id, updated[index], obj)
     }
 
     function addGroup(e) {
@@ -96,19 +148,43 @@ const Home = () => {
         })
     }
 
-    function remove(task) {
+ //   function remove(task) {
+ //       setIsLoading(true)
+ //       axios.delete(`/api/tasks/${task.id}`)
+ //           .then(() => {
+ //               setTasks(tasks.filter(t => t.id !== task.id));
+ //               setIsLoading(false)
+ //           })
+ //   }
+ //   function removeGroup(group){
+ //       setIsLoading(true)
+ //       axios.delete(`/api/groups/${group.id}`)
+ //       .then(() => {
+ //           setGroups(groups.filter(g => g.id !== group.id))
+ //           setIsLoading(false)
+ //       })
+ //   }
+    function remove(arr, obj){
         setIsLoading(true)
-        axios.delete(`/api/tasks/${task.id}`)
-            .then(() => {
-                setTasks(tasks.filter(t => t.id !== task.id));
+        axios.delete(`/api/${obj}/${arr.id}`)
+        .then(() => {
+            if(obj === "groups"){
+                setGroups(groups.filter(g => g.id !== arr.id))
+
                 setIsLoading(false)
-            })
+            }
+            else{
+                setTasks(tasks.filter(t => t.id !== arr.id))
+                setIsLoading(false)
+            }
+        })
     }
 
     return (
         <div className='homepage'>
+            
             <MyModal visible={modal} setVisible={setModal}>
-                <GroupList groups={groups}/>
+                <GroupList groups={groups} setVisible={setModal} remove={remove} edit={edit}/>
             </MyModal>
             <div className='wrapper'>
             <button onClick={() => setModal(true)}>Edit groups</button>
@@ -116,7 +192,7 @@ const Home = () => {
                 <input placeholder='Task name' value={newTask.task} onChange={e => setNewTask({ ...newTask, task: e.target.value })} />
                 <select value={selectGroup} onChange={e => setSelectGroup(e.target.value)}>
                     {groups.map(group =>
-                        <option key={group.group} value={group.id}>{group.group}</option>
+                        <option key={group.id} value={group.id}>{group.group}</option>
                     )}
                 </select>
                 <input type="date" value={newTask.deadline} onChange={e => setNewTask({ ...newTask, deadline: e.target.value })} />
@@ -135,7 +211,7 @@ const Home = () => {
                 <h1 style={{ textAlign: 'center' }}>No tasks! Add one</h1>
             )}
 
-            <TaskList tasks={tasks} remove={remove} edit={editTask} groups={groups}/>
+            <TaskList tasks={tasks} remove={remove} edit={edit} groups={groups}/>
 
             </div>
 

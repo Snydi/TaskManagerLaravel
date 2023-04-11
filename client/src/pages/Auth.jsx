@@ -5,9 +5,9 @@ import { UserContext } from '../AuthContext';
 
 const Auth = ({ isRegistering }) => {
     const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
-    if(isLoggedIn){
-        return <Navigate to="/" replace/>
-    }
+    //if(isLoggedIn){
+    //    return <Navigate to="/" replace/>
+    //}
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',

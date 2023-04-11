@@ -42,8 +42,11 @@ body{
   width: 100%;
   max-width: 1000px;
   padding: 10px;
-  border: 1px solid red;
+  border: 2px solid red;
   border-radius: 10px;
+ }
+ .completed{
+  border: 2px solid green;
  }
 .groups{
   display:flex;
@@ -52,6 +55,7 @@ body{
 .group{
   display:flex;
   align-items: center;
+  justify-content: space-between;
 }
 .group__content{
   display:flex;

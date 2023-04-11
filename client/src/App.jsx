@@ -7,11 +7,13 @@ import { UserContext } from './AuthContext'
 import { useEffect, useState } from 'react'
 
 
+
+// TODO Sidebar on exit animation, groups crud, search bar and sorting.
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    const isLoggedInInLocalStorage = localStorage.getItem('isLoggedIn');
-    if (isLoggedInInLocalStorage === 'true') {
+    if (localStorage.getItem('isLoggedIn') === "true") {
       setIsLoggedIn(true);
     }
   }, []);
