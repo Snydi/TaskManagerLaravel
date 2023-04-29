@@ -3,12 +3,13 @@ import './App.css'
 import { BrowserRouter, Navigate } from 'react-router-dom'
 import AppRouter from './components/AppRouter'
 import Header from './components/UI/Header/Header'
-import { UserContext } from './AuthContext'
+import { UserContext } from './context/AuthContext'
 import { useEffect, useState } from 'react'
 
 
 
-// TODO Sidebar on exit animation, groups crud, search bar and sorting.
+
+// TODO Sidebar on exit animation, search bar and sorting menu.
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

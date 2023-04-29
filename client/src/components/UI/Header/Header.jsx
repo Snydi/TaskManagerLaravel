@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { UserContext } from '../../../AuthContext'
+import { UserContext } from '../../../context/AuthContext'
 import './header.css'
 const Header = () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
 
     const logout = () => {
-        localStorage.setItem('token', "")
+        localStorage.removeItem("token")
         localStorage.setItem('isLoggedIn', false);
         setIsLoggedIn(false)
     }
@@ -14,7 +14,6 @@ const Header = () => {
     return (
         <header>
             <div className='header__wrapper'>
-
                 <ul>
                     <div className='header__content'>
                         <li><Link to="/">Home</Link></li>

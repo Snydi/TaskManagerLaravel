@@ -1,20 +1,12 @@
-import classes from './MyModal.module.css'
+import "./myModal.css"
 
 const MyModal = ({ children, visible, setVisible }) => {
 
     
-  const rootClasses = [classes.myModal];
-  if (visible) {
-    rootClasses.push(classes.active);
-  }
-  if(!visible){
-    rootClasses.push(classes.inactive)
-  }
-
 
   return (
-    <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
-      <div className={classes.myModalContent} onClick={(e) => e.stopPropagation()}>
+    <div className={visible ? "myModal active" : "myModal"} onClick={() => setVisible(false)}>
+      <div className={visible ? "myModalContent active" : "myModalContent"} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
     </div>

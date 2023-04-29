@@ -1,33 +1,32 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { UserContext } from '../AuthContext';
+import TaskService from '../API/TaskService';
+import { UserContext } from '../context/AuthContext';
 
 const Auth = ({ isRegistering }) => {
     const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
-    //if(isLoggedIn){
-    //    return <Navigate to="/" replace/>
-    //}
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         if (!isRegistering) {
-            const response = axios.post("/api/auth/login", formData)
-                .then(response => {
-                    localStorage.setItem('token', JSON.stringify(response.data.token))
-                    setIsLoggedIn(prev => !prev)
-                    localStorage.setItem('isLoggedIn', true);
-                    navigate('/')
-                })
+            const response = await TaskService.login(formData)
+            localStorage.setItem('token', JSON.stringify(response))
+            localStorage.setItem('isLoggedIn', true);
+            setIsLoggedIn(true)
+            navigate('/')
         }
         else {
-            const response = axios.post("api/auth/register", formData)
-                .then(response => {console.log(response)})
+            TaskService.register(formData)
+            setFormData({
+                email: "",
+                password:""
+            })
             navigate('/login')
         }
     };

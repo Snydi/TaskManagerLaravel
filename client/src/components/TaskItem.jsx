@@ -9,13 +9,13 @@ const TaskItem = ({task, index, remove, edit, groups}) => {
             <div className='task__content'>
                 <h2>{index + 1}</h2>
                 <textarea value={task.task} onChange={e => edit(task,e.target.value, index, "task", "tasks")}>{task.task}</textarea>
-                <select value={task.status} onChange={e => edit(task,e.target.value, index, "status")}>
+                <select value={task.status} onChange={e => edit(task,e.target.value, index, "status", "tasks")}>
                     <option default>{task.status}</option>
                   {task.status === "In progress" ?  <option value="Completed">Completed</option> : <option value="In progress">In progress</option>}
                 </select>
-                <input type="date" value={task.deadline} onChange={e => edit(task,e.target.value, index, "deadline")}/>
+                <input type="date" value={task.deadline} onChange={e => edit(task,e.target.value, index, "deadline", "tasks")}/>
             </div>
-            <select value={task.group_id} onChange={e => edit(task, e.target.value, index, "group_id")}>
+            <select value={task.group_id} onChange={e => edit(task, e.target.value, index, "group_id", "tasks")}>
                 {groups.map(group => (
                   <option key={group.id} value={group.id}>
                     {group.group}

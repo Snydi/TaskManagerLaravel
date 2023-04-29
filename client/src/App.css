@@ -44,9 +44,11 @@ body{
   padding: 10px;
   border: 2px solid red;
   border-radius: 10px;
+  transition:1s border;
  }
  .completed{
   border: 2px solid green;
+  transition:1s all;
  }
 .groups{
   display:flex;
