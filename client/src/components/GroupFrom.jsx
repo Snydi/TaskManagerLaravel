@@ -16,7 +16,7 @@ const GroupFrom = ({addGroup}) => {
         })
     }
     return (
-        <Form>
+        <Form className='border border-primary p-3 rounded mb-1  bg-light bg-gradient'>
             <Form.Group className='mb-3 mt-3'>
             <Form.Label>Add group</Form.Label>
             <Form.Control type="text" placeholder="Group name" value={newGroup.group} onChange={e => setNewGroup({ ...newGroup, group: e.target.value })} />

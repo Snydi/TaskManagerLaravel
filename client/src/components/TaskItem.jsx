@@ -35,7 +35,7 @@ const TaskItem = ({task, index, remove, edit, groups}) => {
                             ))}
                         </Form.Select>
                     </Form.Group>
-                    <Button variant={task.status === "Completed" ? "success" : "danger"} onClick={() => {setOpen(false); setTimeout(() => remove(task, "tasks"), 600)}} style={{ transition: "all 0.6s ease-in-out" }}>Delete</Button>
+                    <Button variant={task.status === "Completed" ? "success" : "danger"} onClick={() => {setOpen(false); setTimeout(() => remove(task, "tasks"), 350)}} style={{ transition: "all 0.35s ease-in-out" }}>Delete</Button>
                 </Form>
             </ListGroup.Item>
         </Fade>

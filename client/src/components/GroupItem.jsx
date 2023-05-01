@@ -7,9 +7,9 @@ const GroupItem = ({group, index, remove, edit}) => {
     return (
         <ListGroup.Item>
             <Form className='d-flex justify-content-between align-items-center'>
-            <h2>{index + 1}</h2>
+            <h3>{index + 1}</h3>
                 <Form.Group>
-                    <Form.Control as="textarea" value={group.group} onChange={e => edit(group,e.target.value, index, "group", "groups")}/>
+                    <Form.Control value={group.group} onChange={e => edit(group,e.target.value, index, "group", "groups")}/>
                 </Form.Group>
               {group.group === "No group"
               ?

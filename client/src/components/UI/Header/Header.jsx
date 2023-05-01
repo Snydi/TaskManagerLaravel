@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../context/AuthContext'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
+import './Header.css'
 const Header = () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
-
     const logout = () => {
         localStorage.removeItem("token")
         localStorage.setItem('isLoggedIn', false);

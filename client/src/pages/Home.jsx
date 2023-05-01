@@ -113,7 +113,7 @@ const Home = () => {
           {isLoading && <MyLoader className="d-flex "/>}
           </div>
 
-          <MyCollapse open={open} className="mt-3">
+          <MyCollapse open={open} className="mt-3 border">
             <TaskForm
               groups={groups}
               add={addTask}
