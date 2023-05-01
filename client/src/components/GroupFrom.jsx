@@ -18,10 +18,10 @@ const GroupFrom = ({addGroup}) => {
     return (
         <Form>
             <Form.Group className='mb-3 mt-3'>
+            <Form.Label>Add group</Form.Label>
             <Form.Control type="text" placeholder="Group name" value={newGroup.group} onChange={e => setNewGroup({ ...newGroup, group: e.target.value })} />
             </Form.Group>
-            <Button onClick={e => handleAdd(e,newGroup)}>Add Group</Button>
-            
+            <Button onClick={e => handleAdd(e,newGroup)} className='mb-3'>Add Group</Button>
         </Form>
     );
 }

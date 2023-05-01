@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../context/AuthContext";
 import TaskList from "../components/TaskList";
 import MyLoader from "../components/UI/Loader/myLoader";
 import useDebounce from "../hooks/useDebounce";
@@ -9,11 +8,22 @@ import TaskService from "../API/TaskService";
 import TaskForm from "../components/TaskForm";
 import GroupFrom from "../components/GroupFrom";
 import useTasks from "../hooks/useTasks";
-import Button from 'react-bootstrap/Button'
+import Button from "react-bootstrap/Button";
+import MyCollapse from "../components/UI/Collapse/myCollapse";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 const Home = () => {
   const [modal, setModal] = useState(false);
-  const [tasks, setTasks, groups, setGroups, isLoading, setIsLoading, selectGroup, setSelectGroup] = useTasks();
-  const [confirm, setConfirm] = useState(false)
+  const [
+    tasks,
+    setTasks,
+    groups,
+    setGroups,
+    isLoading,
+    setIsLoading,
+    selectGroup,
+    setSelectGroup,
+  ] = useTasks();
+  const [open, setOpen] = useState(false);
   const debouncedEdit = useDebounce((id, updated, obj) => {
     setIsLoading(true);
     TaskService.update(id, updated, obj)
@@ -27,9 +37,8 @@ const Home = () => {
   }, 350);
   function addTask(newTask) {
     setIsLoading(true);
-    TaskService.add(newTask)
-    .then((response) => {
-      setTasks(prevTasks => [...prevTasks, response]);
+    TaskService.add(newTask).then((response) => {
+      setTasks((prevTasks) => [...prevTasks, response]);
       setIsLoading(false);
     });
   }
@@ -49,7 +58,7 @@ const Home = () => {
   }
 
   function addGroup(newGroup) {
-  setIsLoading(true);
+    setIsLoading(true);
     TaskService.addGroup({
       ...newGroup,
       user_id: groups[0].user_id,
@@ -61,8 +70,7 @@ const Home = () => {
 
   function remove(arr, obj) {
     setIsLoading(true);
-    TaskService.remove(arr, obj)
-    .then(() => {
+    TaskService.remove(arr, obj).then(() => {
       if (obj === "groups") {
         setGroups(groups.filter((g) => g.id !== arr.id));
         setTasks(tasks.filter((t) => t.group_id != arr.id));
@@ -73,13 +81,11 @@ const Home = () => {
       }
     });
   }
-  //function handleConfirm(arr,obj){
-  //  remove(arr, obj)
-  //  setConfirm(false)
-  //}
+
   return (
     <div className="homepage">
       <MyModal visible={modal} setVisible={setModal}>
+        <GroupFrom addGroup={addGroup} />
         <GroupList
           groups={groups}
           setVisible={setModal}
@@ -89,24 +95,30 @@ const Home = () => {
       </MyModal>
 
       <div className="wrapper">
-        <Button onClick={() => setModal(true)}>Edit groups</Button>
-        <TaskForm
-          groups={groups}
-          add={addTask}
-          selectGroup={selectGroup}
-          setSelectGroup={setSelectGroup}
-        />
-        <GroupFrom
-          addGroup={addGroup}
-        />
-        {isLoading ? (
-          <MyLoader style={{ display: "flex", margin: "0 auto" }} />
-        ) : tasks.length ? (
-          <h1 style={{ textAlign: "center" }}>Tasks:</h1>
-        ) : (
-          <h1 style={{ textAlign: "center" }}>No tasks! Add one</h1>
-        )}
-        <TaskList tasks={tasks} remove={remove} edit={edit} groups={groups}/>
+        <div className="mt-5">
+          {tasks.length ? (
+            <h1 style={{ textAlign: "center" }}>Tasks:</h1>
+          ) : (
+            <h1 style={{ textAlign: "center" }}>No tasks! Add one</h1>
+          )}
+          <ButtonGroup className="mb-3">
+            <Button onClick={() => setOpen((prev) => !prev)}>
+              {open ? "Close" : "Add Task"}
+            </Button>
+            <Button onClick={() => setModal(true)}>Edit groups</Button>
+            {isLoading && <MyLoader/>}
+          </ButtonGroup>
+
+          <MyCollapse open={open} className="mt-3">
+            <TaskForm
+              groups={groups}
+              add={addTask}
+              selectGroup={selectGroup}
+              setSelectGroup={setSelectGroup}
+            />
+          </MyCollapse>
+          <TaskList tasks={tasks} remove={remove} edit={edit} groups={groups} />
+        </div>
       </div>
     </div>
   );

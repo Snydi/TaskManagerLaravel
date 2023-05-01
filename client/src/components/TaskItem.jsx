@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 const TaskItem = ({task, index, remove, edit, groups}) => {
 
     return (
-            <ListGroup.Item>
+            <ListGroup.Item variant={task.status === "Completed" ? "success" : null}>
             <Form className='d-flex justify-content-between align-items-center'>
                 <h2>{index+1}</h2>
                 <Form.Group>

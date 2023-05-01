@@ -1,10 +1,13 @@
 import React from 'react';
 import classes from './myLoader.module.css'
+import Spinner from 'react-bootstrap/Spinner';
 
 const MyLoader = (props) => {
     return (
-<div {...props} className={classes.ldsEllipsis}><div></div><div></div><div></div><div></div></div>
-    );
+        <Spinner animation="border" role="status" {...props}>
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      );
 }
 
 export default MyLoader;
