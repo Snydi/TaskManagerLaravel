@@ -55,6 +55,7 @@ const Home = () => {
       setTasks(updated);
     }
     debouncedEdit(arr.id, updated[index], obj);
+
   }
 
   function addGroup(newGroup) {
@@ -101,13 +102,16 @@ const Home = () => {
           ) : (
             <h1 style={{ textAlign: "center" }}>No tasks! Add one</h1>
           )}
-          <ButtonGroup className="mb-3">
+          <div className="d-flex mb-1 justify-content-between align-items-center">
+          <ButtonGroup>
             <Button onClick={() => setOpen((prev) => !prev)}>
               {open ? "Close" : "Add Task"}
             </Button>
             <Button onClick={() => setModal(true)}>Edit groups</Button>
-            {isLoading && <MyLoader/>}
+
           </ButtonGroup>
+          {isLoading && <MyLoader className="d-flex "/>}
+          </div>
 
           <MyCollapse open={open} className="mt-3">
             <TaskForm

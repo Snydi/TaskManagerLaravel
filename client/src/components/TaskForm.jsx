@@ -43,7 +43,7 @@ const TaskForm = ({groups, setSelectGroup, selectGroup, add}) => {
         <Form.Label>Deadline</Form.Label>
         <Form.Control type="date" className="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={newTask.deadline} onChange={e => setNewTask({ ...newTask, deadline: e.target.value })} required/>
         </Form.Group>
-        <Button type="button" className="btn btn-primary" onClick={(e) => handleAdd(e, newTask)}>Add Task</Button>
+        <Button type="button" className="btn btn-primary mb-3" onClick={(e) => handleAdd(e, newTask)}>Add Task</Button>
       </Form>
     );
 }
