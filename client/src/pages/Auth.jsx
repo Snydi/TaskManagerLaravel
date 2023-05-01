@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import TaskService from '../API/TaskService';
 import { UserContext } from '../context/AuthContext';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const Auth = ({ isRegistering }) => {
     const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
@@ -41,31 +42,28 @@ const Auth = ({ isRegistering }) => {
 
 
     return (
+        <>
         <div className='wrapper'>
-        <form onSubmit={handleSubmit}>
-            <h1>{isRegistering ? 'Register' : 'Login'}</h1>
-            <label>
-                Email:
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Password:
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <br />
-            <button type="submit">{isRegistering ? 'Register' : 'Login'}</button>
-        </form>
-        </div>
+        <Form onSubmit={handleSubmit} className='mt-5'>
+        <h1>{isRegistering ? 'Register' : 'Login'}</h1>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" name="email" placeholder="Enter email"  value={formData.email} onChange={handleInputChange}/>
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+      {isRegistering ? 'Register' : 'Login'}
+      </Button>
+    </Form>
+    </div>
+        </>
     );
 };
 

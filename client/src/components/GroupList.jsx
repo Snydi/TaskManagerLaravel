@@ -1,16 +1,10 @@
-import React from 'react';
-import GroupItem from './GroupItem';
+import React from "react";
+import GroupItem from "./GroupItem";
+import ListGroup from 'react-bootstrap/ListGroup';
 
-const GroupList = ({groups, setVisible, remove, edit}) => {
-    return (
-      <>
-      <span onClick={() => setVisible(false)} style={{cursor:"pointer", float:"right", marginTop:"20px"}} className="material-symbols-outlined">
-      close
-      </span>
-        <div className="groups">
-
-          <h1 style={{textAlign:"center"}}>Groups:</h1>
-
+const GroupList = ({ groups, setVisible, remove, edit }) => {
+  return (
+    <ListGroup>
       {groups.map((group, index) => (
         <GroupItem
           group={group}
@@ -20,9 +14,8 @@ const GroupList = ({groups, setVisible, remove, edit}) => {
           edit={edit}
         />
       ))}
-    </div>
-    </>
-    );
-}
+    </ListGroup>
+  );
+};
 
 export default GroupList;

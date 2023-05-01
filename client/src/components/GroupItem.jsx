@@ -1,21 +1,24 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup';
+import Form from 'react-bootstrap/Form';
 
 const GroupItem = ({group, index, remove, edit}) => {
     return (
-        <div className='group'>
-            <div className='group__content'>
-                <h2>{index + 1}</h2>
-                <textarea value={group.group} onChange={e => edit(group,e.target.value, index, "group", "groups")}>{group.group}</textarea>
-            </div>
-            <div className='group__buttons'>
+        <ListGroup.Item>
+            <Form className='d-flex justify-content-between align-items-center'>
+            <h2>{index + 1}</h2>
+                <Form.Group>
+                    <Form.Control as="textarea" value={group.group} onChange={e => edit(group,e.target.value, index, "group", "groups")}/>
+                </Form.Group>
               {group.group === "No group"
               ?
-              <button disabled>Delete</button>
+              <Button variant='danger' disabled>Delete</Button>
               :
-              <button onClick={() => remove(group, "groups") }>Delete</button>
+              <Button variant='danger' onClick={() => remove(group, "groups") }>Delete</Button>
                 }
-            </div>
-        </div>
+            </Form>
+        </ListGroup.Item>
     );
 }
 

@@ -12,15 +12,16 @@ const useTasks = () => {
     setTasks(tasksResponse.data);
     setGroups(groupsResponse.data);
     setSelectGroup(groupsResponse.data[0].id);
+    
   };
 
-  const [fetchData, isLoading, error] = useFetching(fetchTasksAndGroups);
+  const [fetchData, isLoading, setIsLoading, error] = useFetching(fetchTasksAndGroups);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  return [tasks, setTasks, groups, setGroups, isLoading, selectGroup, setSelectGroup, error];
+  return [tasks, setTasks, groups, setGroups, isLoading, setIsLoading, selectGroup, setSelectGroup, error];
 };
 
 export default useTasks;

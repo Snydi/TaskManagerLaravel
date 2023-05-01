@@ -9,10 +9,11 @@ import TaskService from "../API/TaskService";
 import TaskForm from "../components/TaskForm";
 import GroupFrom from "../components/GroupFrom";
 import useTasks from "../hooks/useTasks";
+import Button from 'react-bootstrap/Button'
 const Home = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const [modal, setModal] = useState(false);
-  const [tasks, setTasks, groups, setGroups, isLoading, selectGroup, setSelectGroup] = useTasks();
+  const [tasks, setTasks, groups, setGroups, isLoading, setIsLoading, selectGroup, setSelectGroup] = useTasks();
+  const [confirm, setConfirm] = useState(false)
   const debouncedEdit = useDebounce((id, updated, obj) => {
     setIsLoading(true);
     TaskService.update(id, updated, obj)
@@ -24,21 +25,11 @@ const Home = () => {
         setIsLoading(false);
       });
   }, 350);
-  function addTask(e) {
-    e.preventDefault();
+  function addTask(newTask) {
     setIsLoading(true);
-    TaskService.add({
-      ...newTask,
-      group_id: selectGroup,
-    }).then((response) => {
-      setTasks((prevTasks) => [...prevTasks, response]);
-      setNewTask({
-        task: "",
-        group_id: "",
-        status: "In progress",
-        deadline: "",
-      });
-      setSelectGroup(groups[0].id);
+    TaskService.add(newTask)
+    .then((response) => {
+      setTasks(prevTasks => [...prevTasks, response]);
       setIsLoading(false);
     });
   }
@@ -57,25 +48,21 @@ const Home = () => {
     debouncedEdit(arr.id, updated[index], obj);
   }
 
-  function addGroup(e) {
-    e.preventDefault();
-    setIsLoading(true);
+  function addGroup(newGroup) {
+  setIsLoading(true);
     TaskService.addGroup({
       ...newGroup,
       user_id: groups[0].user_id,
     }).then((response) => {
       setGroups((prev) => [...prev, response]);
-      setNewGroup({
-        group: "",
-        user_id: null,
-      });
       setIsLoading(false);
     });
   }
 
   function remove(arr, obj) {
     setIsLoading(true);
-    TaskService.remove(arr, obj).then(() => {
+    TaskService.remove(arr, obj)
+    .then(() => {
       if (obj === "groups") {
         setGroups(groups.filter((g) => g.id !== arr.id));
         setTasks(tasks.filter((t) => t.group_id != arr.id));
@@ -86,7 +73,10 @@ const Home = () => {
       }
     });
   }
-
+  //function handleConfirm(arr,obj){
+  //  remove(arr, obj)
+  //  setConfirm(false)
+  //}
   return (
     <div className="homepage">
       <MyModal visible={modal} setVisible={setModal}>
@@ -97,13 +87,14 @@ const Home = () => {
           edit={edit}
         />
       </MyModal>
+
       <div className="wrapper">
-        <button onClick={() => setModal(true)}>Edit groups</button>
+        <Button onClick={() => setModal(true)}>Edit groups</Button>
         <TaskForm
           groups={groups}
-          setSelectGroup={setSelectGroup}
-          selectGroup={selectGroup}
           add={addTask}
+          selectGroup={selectGroup}
+          setSelectGroup={setSelectGroup}
         />
         <GroupFrom
           addGroup={addGroup}
@@ -115,7 +106,7 @@ const Home = () => {
         ) : (
           <h1 style={{ textAlign: "center" }}>No tasks! Add one</h1>
         )}
-        <TaskList tasks={tasks} remove={remove} edit={edit} groups={groups} />
+        <TaskList tasks={tasks} remove={remove} edit={edit} groups={groups}/>
       </div>
     </div>
   );

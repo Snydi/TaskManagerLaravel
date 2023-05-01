@@ -1,15 +1,17 @@
-import "./myModal.css"
-
+import Offcanvas from 'react-bootstrap/Offcanvas';
 const MyModal = ({ children, visible, setVisible }) => {
 
     
 
   return (
-    <div className={visible ? "myModal active" : "myModal"} onClick={() => setVisible(false)}>
-      <div className={visible ? "myModalContent active" : "myModalContent"} onClick={(e) => e.stopPropagation()}>
-        {children}
-      </div>
-    </div>
+    <Offcanvas show={visible} onHide={setVisible}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Groups</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {children}
+        </Offcanvas.Body>
+      </Offcanvas>
   );
 };
 

@@ -1,10 +1,10 @@
 import React from "react";
 import TaskItem from "./TaskItem";
-
-const TaskList = ({ tasks, remove, edit, groups }) => {
+import ListGroup from 'react-bootstrap/ListGroup';
+const TaskList = ({ tasks, remove, edit, groups, handleConfirm }) => {
 
   return (
-    <div className="tasks">
+    <ListGroup>
       {tasks.map((task, index) => (
         <TaskItem
           task={task}
@@ -13,9 +13,10 @@ const TaskList = ({ tasks, remove, edit, groups }) => {
           remove={remove}
           edit={edit}
           groups={groups}
+          handleConfirm={handleConfirm}
         />
       ))}
-    </div>
+    </ListGroup>
   );
 };
 

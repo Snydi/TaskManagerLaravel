@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../../context/AuthContext'
-import './header.css'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
 const Header = () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
 
@@ -12,25 +15,23 @@ const Header = () => {
     }
     
     return (
-        <header>
-            <div className='header__wrapper'>
-                <ul>
-                    <div className='header__content'>
-                        <li><Link to="/">Home</Link></li>
-                            <div className='header__auth'>
+        <Navbar bg="dark" variant="dark">
+            <Container>
+                <Navbar.Brand as={Link} to="/">Task Manager</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ms-auto">
                         {!isLoggedIn
                             ?
-                            <li><Link to="/login">Login</Link></li>
+                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
                             :
-                            <li><a onClick={logout}>Logout</a></li>
+                            <Nav.Link onClick={logout}>Logout</Nav.Link>
                         }
-                        {!isLoggedIn && <li><Link to="/register">Registration</Link></li>}
-                        </div>
-                    </div>
-                </ul>
-
-            </div>
-        </header>
+                        {!isLoggedIn && <Nav.Link as={Link} to="/register">Registration</Nav.Link>}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 }
 
