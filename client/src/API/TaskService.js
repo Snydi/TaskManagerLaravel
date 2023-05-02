@@ -1,4 +1,3 @@
-import axios from "axios";
 import { $authHost, $host } from "./index";
 export default class TaskService {
   static async getAll() {

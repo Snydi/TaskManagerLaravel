@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import TaskList from "../components/TaskList";
 import MyLoader from "../components/UI/Loader/myLoader";
 import useDebounce from "../hooks/useDebounce";
@@ -6,11 +6,13 @@ import MyModal from "../components/UI/Modal/myModal";
 import GroupList from "../components/GroupList";
 import TaskService from "../API/TaskService";
 import TaskForm from "../components/TaskForm";
-import GroupFrom from "../components/GroupFrom";
+import GroupFrom from "../components/GroupForm";
 import useTasks from "../hooks/useTasks";
 import Button from "react-bootstrap/Button";
 import MyCollapse from "../components/UI/Collapse/myCollapse";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+
+
 const Home = () => {
   const [modal, setModal] = useState(false);
   const [
@@ -40,6 +42,11 @@ const Home = () => {
     TaskService.add(newTask).then((response) => {
       setTasks((prevTasks) => [...prevTasks, response]);
       setIsLoading(false);
+    })
+    .catch(error => {
+      console.log(error)
+      setIsLoading(false)
+      setError("Fields cannot be empty!")
     });
   }
 
@@ -82,14 +89,12 @@ const Home = () => {
       }
     });
   }
-
   return (
     <div className="homepage">
       <MyModal visible={modal} setVisible={setModal}>
         <GroupFrom addGroup={addGroup} />
         <GroupList
           groups={groups}
-          setVisible={setModal}
           remove={remove}
           edit={edit}
         />
@@ -108,11 +113,9 @@ const Home = () => {
               {open ? "Close" : "Add Task"}
             </Button>
             <Button onClick={() => setModal(true)}>Edit groups</Button>
-
           </ButtonGroup>
           {isLoading && <MyLoader className="d-flex "/>}
           </div>
-
           <MyCollapse open={open} className="mt-3 border">
             <TaskForm
               groups={groups}

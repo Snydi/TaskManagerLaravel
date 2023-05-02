@@ -2,7 +2,7 @@ import React from "react";
 import GroupItem from "./GroupItem";
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const GroupList = ({ groups, setVisible, remove, edit }) => {
+const GroupList = ({ groups, remove, edit }) => {
   return (
     <ListGroup>
       {groups.map((group, index) => (

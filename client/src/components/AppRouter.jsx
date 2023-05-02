@@ -6,8 +6,6 @@ import { UserContext } from '../context/AuthContext';
 const AppRouter = () => {
    const { isLoggedIn } = useContext(UserContext)
     
-    
-
     return (
         <>
         {isLoggedIn ?

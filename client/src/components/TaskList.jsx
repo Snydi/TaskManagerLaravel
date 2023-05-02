@@ -1,7 +1,7 @@
 import React from "react";
 import TaskItem from "./TaskItem";
 import ListGroup from 'react-bootstrap/ListGroup';
-const TaskList = ({ tasks, remove, edit, groups, handleConfirm }) => {
+const TaskList = ({ tasks, remove, edit, groups }) => {
 
   return (
     <ListGroup>
@@ -13,7 +13,6 @@ const TaskList = ({ tasks, remove, edit, groups, handleConfirm }) => {
           remove={remove}
           edit={edit}
           groups={groups}
-          handleConfirm={handleConfirm}
         />
       ))}
     </ListGroup>
