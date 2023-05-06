@@ -11,7 +11,7 @@ import useTasks from "../hooks/useTasks";
 import Button from "react-bootstrap/Button";
 import MyCollapse from "../components/UI/Collapse/myCollapse";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-
+import Alert from 'react-bootstrap/Alert';
 
 const Home = () => {
   const [modal, setModal] = useState(false);
@@ -26,16 +26,18 @@ const Home = () => {
     setSelectGroup,
   ] = useTasks();
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState("")
   const debouncedEdit = useDebounce((id, updated, obj) => {
     setIsLoading(true);
     TaskService.update(id, updated, obj)
       .then(() => {
         setIsLoading(false);
+        setError("")
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(error => {
+        setError("Edit fields can't be empty!")
         setIsLoading(false);
-      });
+      })
   }, 350);
   function addTask(newTask) {
     setIsLoading(true);
@@ -46,7 +48,6 @@ const Home = () => {
     .catch(error => {
       console.log(error)
       setIsLoading(false)
-      setError("Fields cannot be empty!")
     });
   }
 
@@ -92,6 +93,9 @@ const Home = () => {
   return (
     <div className="homepage">
       <MyModal visible={modal} setVisible={setModal}>
+      {error && <Alert variant="danger">
+              {error}
+              </Alert>}
         <GroupFrom addGroup={addGroup} />
         <GroupList
           groups={groups}
@@ -105,8 +109,9 @@ const Home = () => {
           {tasks.length ? (
             <h1 style={{ textAlign: "center" }}>Tasks:</h1>
           ) : (
-            <h1 style={{ textAlign: "center" }}>No tasks! Add one</h1>
+            <h1 style={{ textAlign: "center" }}>{isLoading ? "Loading..." : "No Tasks!"}</h1>
           )}
+          
           <div className="d-flex mb-1 justify-content-between align-items-center">
           <ButtonGroup>
             <Button onClick={() => setOpen((prev) => !prev)}>
@@ -124,6 +129,9 @@ const Home = () => {
               setSelectGroup={setSelectGroup}
             />
           </MyCollapse>
+          {error && <Alert variant="danger">
+              {error}
+              </Alert>}
           <TaskList tasks={tasks} remove={remove} edit={edit} groups={groups} />
         </div>
       </div>

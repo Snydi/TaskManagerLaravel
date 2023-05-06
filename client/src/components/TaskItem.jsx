@@ -9,6 +9,7 @@ const TaskItem = ({task, index, remove, edit, groups}) => {
     useEffect(() => {
         setOpen(true);
     }, []);
+
     return (
         <Fade in={open}>
             <ListGroup.Item variant={task.status === "Completed" ? "success" : ""}  style={{ transition: "all 0.6s ease-in-out" }}>
@@ -16,6 +17,7 @@ const TaskItem = ({task, index, remove, edit, groups}) => {
                     <h2>{index+1}</h2>
                     <Form.Group>
                         <Form.Control as="textarea" value={task.task} onChange={e => edit(task,e.target.value, index, "task", "tasks")}></Form.Control>
+                        <Form.Control.Feedback type="invalid">Can't be empty!</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Select value={task.status} onChange={e => edit(task,e.target.value, index, "status", "tasks")}>
