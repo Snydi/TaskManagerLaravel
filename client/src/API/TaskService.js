@@ -6,29 +6,29 @@ export default class TaskService {
     return [taskResponse, groupsResponse];
   }
   static async login(data) {
-    const response = await $host.post("/api/auth/login", data);
+    const response = await $host.post("https://dusiol.serveo.net/api/auth/login", data);
     return response.data.token;
   }
   static async register(data) {
-    const response = await $host.post("/api/auth/register", data);
+    const response = await $host.post("https://dusiol.serveo.net/api/auth/register", data);
     return response.data;
   }
 
   static async add({ ...args }) {
-    const response = await $authHost.post("/api/tasks/store", { ...args });
+    const response = await $authHost.post("https://dusiol.serveo.net/api/tasks/store", { ...args });
     return response.data;
   }
 
   static async addGroup({ ...args }) {
-    const response = await $authHost.post("/api/groups/store", { ...args });
+    const response = await $authHost.post("https://dusiol.serveo.net/api/groups/store", { ...args });
     return response.data;
   }
 
   static async remove(arr, obj) {
-    await $authHost.delete(`/api/${obj}/${arr.id}`);
+    await $authHost.delete(`https://dusiol.serveo.net/api/${obj}/${arr.id}`);
   }
 
   static async update(id, updated, obj) {
-    await $authHost.put(`/api/${obj}/${id}`, updated);
+    await $authHost.put(`https://dusiol.serveo.net/api/${obj}/${id}`, updated);
   }
 }
