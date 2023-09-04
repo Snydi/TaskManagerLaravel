@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,45 +13,16 @@ use \App\Http\Controllers\UserController;
 |
 */
 
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\GroupController;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
 //TODO start using proper methods for update and delete
 
-Route::get('/', function ()
-{
-    return view('home');
-});
 
-Route::get('/tasks', [TaskController::class, 'index']);
-Route::get('/create-task', [TaskController::class, 'create']);
-Route::post('/create-task-submit', [TaskController::class, 'store']);
-Route::get('/update-task/{id}', [TaskController::class, 'edit']);
-Route::post('/update-task-submit/{id}', [TaskController::class, 'update']);
-
-Route::get('/completeTask/{id}', [TaskController::class, 'completeTask']);
-Route::get('/delete/{id}', [TaskController::class, 'delete']);
+Route::get('/{any}', function () {
+    return File::get(public_path('index.html'));
+})->where('any', '.*');
 
 
-Route::post('/create-group-submit', [GroupController::class, 'create']);
-Route::get('/create-group',function ()
-{
-    return view('group.create');
-});
-
-
-Route::get('/register',function ()
-{
-    return view('register');
-});
-Route::post('register-form', [UserController::class, 'register']);
-
-
-Route::get('/login', function ()
-{
-    return view('login');
-});
-Route::post('login-form', [UserController::class, 'login']);
-Route::get('/logout', [UserController::class, 'logout']);
 
 
 
